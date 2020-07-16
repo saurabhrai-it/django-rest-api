@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'user',
+    'core',
+    'recipe',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -76,13 +80,13 @@ WSGI_APPLICATION = 'learn_rest_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',                     #os.environ.get('DB_HOST'),        #To fetch data from docker file
-        'NAME': 'app',                     #os.environ.get('DB_NAME'),
-        'USER': 'postgres',                     #os.environ.get('DB_USER'),
-        'PASSWORD': 'rdx',                     #os.environ.get('DB_PASSWORD'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db1.sqlite3'),
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'HOST': 'localhost',                     #os.environ.get('DB_HOST'),        #To fetch data from docker file
+        # 'NAME': 'app',                     #os.environ.get('DB_NAME'),
+        # 'USER': 'postgres',                     #os.environ.get('DB_USER'),
+        # 'PASSWORD': 'rdx',                     #os.environ.get('DB_PASSWORD'),
     }
 }
 
