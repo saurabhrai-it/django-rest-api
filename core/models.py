@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser,\
                                         BaseUserManager, PermissionsMixin
 
 
+# Foreign key : https://docs.djangoproject.com/en/2.1/ref/models/fields/#django.db.models.ForeignKey
+# Model : https://docs.djangoproject.com/en/2.1/ref/models/instances/#django.db.models.Model.__str__
 class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **extra_fields):
@@ -48,3 +50,32 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+class Ingredient(models.Model):
+    """Ingredients to be used by recipe"""
+    name = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete= models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class Recipe(models.Model):
+    """Recipe object"""
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    title = models.CharField(max_length=255)
+    time_minutes = models.IntegerField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    link = models.CharField(max_length=255, blank=True)
+    ingredients = models.ManyToManyField('Ingredient')
+    tags = models.ManyToManyField('Tag')
+    # https://docs.djangoproject.com/en/2.1/ref/models/fields/#django.db.models.ManyToManyField
+
+    def __str__(self):
+        return self.title
